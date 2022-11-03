@@ -1,17 +1,18 @@
 "use strict";
 
 let minute = (parseInt(prompt('Escriba los minutos que quieres que dure tu temporizador:')));
-while (minute !== null || minute !== '') {
+while (minute < 0) {
     minute = (parseInt(prompt('VALOR INVÁLIDO. Escriba los minutos que quieres que dure tu temporizador:')));
 }
 
 let second = (parseInt(prompt('Escriba los segundos que quieres que dure tu temporizador:')));
-while (second < 0 || second !== null || second !== '') {
+while (second < 0) {
     second = (parseInt(prompt('VALOR INVÁLIDO. Escriba los segundos que quieres que dure tu temporizador:')));
 }
 
-let temporizador = setInterval(function() {
 
+let temporizador = setInterval(function() {
+    
     if (second > 60) {
         minute = minute + Math.floor((second / 60) % 60);
         second = second % 60;
@@ -25,7 +26,9 @@ let temporizador = setInterval(function() {
             minute--;
             second = 59;
             if (minute < 0) {
-                alert('¡¡PI-PIII-SE ACABO LA CUENTA ATRÁS!!!!');
+                let audio = new Audio('alarma.wav');
+                audio.play();
+                alert('¡¡PI-PI-PIIIII SE ACABO LA CUENTA ATRÁS!!!!');
             } else {
                 if (second < 10 && minute > 9) {
                     document.write(minute + ':' + '0' + second);
@@ -58,4 +61,4 @@ let temporizador = setInterval(function() {
         }
     }
 
-},1000, minute, second);
+},1000, minute, second); 
